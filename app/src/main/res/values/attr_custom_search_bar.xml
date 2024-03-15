@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomSearchBar">
+        <attr name="searchBarBackground" format="reference" />
+        <attr name="searchIcon" format="reference" />
+        <attr name="searchBarHint" format="string" />
+        <attr name="searchBarTextColor" format="color" />
+        <attr name="searchBarHintColor" format="color" />
+        <attr name="searchBarIconTint" format="color" />
+        <attr name="searchBarCornerRadius" format="float" />
+
+    </declare-styleable>
+</resources>

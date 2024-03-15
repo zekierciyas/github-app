@@ -35,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
@@ -67,6 +71,7 @@ dependencies {
     implementation(libs.retrofit.mock)
     implementation(libs.converter.gson)
     implementation(libs.gson)
+    implementation(libs.interceptor)
 
     //Coroutine, Lightweight Threading
     implementation(libs.coroutines.core)
