@@ -1,7 +1,7 @@
 package com.zekierciyas.github_app.core.data.api
 
 import com.zekierciyas.github_app.feat_userdetail.data.model.UserDetailEntity
-import com.zekierciyas.github_app.feat_userlist.data.model.UserListEntity
+import com.zekierciyas.github_app.feat_userlist.data.model.UserResponseEntity
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,7 +15,7 @@ import retrofit2.http.Query
  */
 interface GithubAPI {
     @GET("search/users")
-    suspend fun searchUsers(@Query("q") query: String): UserListEntity
+    suspend fun searchUsers(@Query("q") query: String): UserResponseEntity
 
     @GET("users/{login}")
     suspend fun getUserDetails(@Path("login") login: String): UserDetailEntity

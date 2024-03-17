@@ -31,11 +31,7 @@ class UserListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             userListUseCase
                 .execute(query)
-                .stateIn(
-                    scope = viewModelScope,
-                    started = WhileSubscribedOrRetained,
-                    initialValue = DataState.Loading
-                ).collect{
+                .collect{
                     _userFlow.emit(it)
                 }
         }

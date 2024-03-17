@@ -1,34 +1,64 @@
 package com.zekierciyas.github_app.feat_userlist.di
 
+import android.content.Context
+import androidx.room.Room
 import com.zekierciyas.github_app.core.data.api.GithubAPI
-import com.zekierciyas.github_app.feat_userlist.data.repository.GetUserListRepositoryImp
+import com.zekierciyas.github_app.feat_userlist.data.local.db.AppDatabase
+import com.zekierciyas.github_app.feat_userlist.data.local.repository.UserListLocalRepositoryImp
+import com.zekierciyas.github_app.feat_userlist.data.remote.repository.UserListRemoteRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.domain.mapper.UserListMapper
 import com.zekierciyas.github_app.feat_userlist.domain.usecase.GetUserListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 object UserListModule {
 
     @Provides
-    @ViewModelScoped
-    fun provideSampleRepository(apiService: GithubAPI): GetUserListRepositoryImp {
-        return GetUserListRepositoryImp(apiService = apiService)
+    @Singleton
+    fun provideSampleRepository(apiService: GithubAPI): UserListRemoteRepositoryImp {
+        return UserListRemoteRepositoryImp(apiService = apiService)
     }
 
     @Provides
-    @ViewModelScoped
-    fun provideSampleUseCase(repository: GetUserListRepositoryImp, userListMapper: UserListMapper): GetUserListUseCase {
-        return GetUserListUseCase(userListRepo = repository, userListMapper = userListMapper)
+    @Singleton
+    fun provideSampleUseCase(
+        repository: UserListRemoteRepositoryImp,
+        userListLocalRepositoryImp: UserListLocalRepositoryImp,
+        userListMapper: UserListMapper
+    ): GetUserListUseCase {
+        return GetUserListUseCase(
+            userListRemoteRepo = repository,
+            userListLocalRepo = userListLocalRepositoryImp,
+            userListMapper = userListMapper
+        )
     }
 
     @Provides
-    @ViewModelScoped
+    @Singleton
     fun provideUserListMapper(): UserListMapper {
         return UserListMapper()
     }
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+        return Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            "github-db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideItemUserListRepository(db: AppDatabase): UserListLocalRepositoryImp {
+        return UserListLocalRepositoryImp(db)
+    }
+
 }

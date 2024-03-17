@@ -1,5 +1,5 @@
 package com.zekierciyas.github_app.core.domain.mapper
 
-interface GenericMapper<EntityModel, DomainModel> {
-    fun asDomainModel(entity: EntityModel): DomainModel
+interface GenericMapper<ModelA, ModelB> {
+    fun map(entity: ModelA): ModelB
 }

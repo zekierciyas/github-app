@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
     alias(libs.plugins.hilt)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -64,7 +65,8 @@ dependencies {
 
     //Room, Caching
     implementation(libs.room.ktx)
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
+    implementation ("androidx.room:room-runtime:2.6.1")
 
     //Retrofit, Networking
     implementation(libs.retrofit)
