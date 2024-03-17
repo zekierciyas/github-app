@@ -47,7 +47,6 @@ class UserListFragment: BaseFragment<UserListViewModel>() {
         binding.rcProfileList.apply {
             adapter = userListAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL))
         }
     }
 

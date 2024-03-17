@@ -3,6 +3,7 @@ package com.zekierciyas.github_app.feat_userlist.di
 import android.content.Context
 import androidx.room.Room
 import com.zekierciyas.github_app.core.data.api.GithubAPI
+import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
 import com.zekierciyas.github_app.feat_userlist.data.local.db.AppDatabase
 import com.zekierciyas.github_app.feat_userlist.data.local.repository.UserListLocalRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.data.remote.repository.UserListRemoteRepositoryImp
@@ -13,6 +14,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import java.util.Calendar
 import javax.inject.Singleton
 
 @Module
@@ -30,12 +32,14 @@ object UserListModule {
     fun provideSampleUseCase(
         repository: UserListRemoteRepositoryImp,
         userListLocalRepositoryImp: UserListLocalRepositoryImp,
-        userListMapper: UserListMapper
+        userListMapper: UserListMapper,
+        cacheExpiryDatePolicy: CacheExpiryDatePolicy
     ): GetUserListUseCase {
         return GetUserListUseCase(
             userListRemoteRepo = repository,
             userListLocalRepo = userListLocalRepositoryImp,
-            userListMapper = userListMapper
+            userListMapper = userListMapper,
+            cacheExpiryDatePolicy = cacheExpiryDatePolicy
         )
     }
 
@@ -61,4 +65,9 @@ object UserListModule {
         return UserListLocalRepositoryImp(db)
     }
 
+    @Provides
+    @Singleton
+    fun cacheExpiryPolicy(): CacheExpiryDatePolicy {
+        return CacheExpiryDatePolicy(calendar = Calendar.getInstance())
+    }
 }

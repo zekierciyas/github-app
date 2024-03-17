@@ -4,15 +4,15 @@ import com.zekierciyas.github_app.feat_userlist.data.local.db.AppDatabase
 import com.zekierciyas.github_app.feat_userlist.data.model.ItemUserEntity
 import com.zekierciyas.github_app.feat_userlist.data.model.UserListEntity
 import kotlinx.coroutines.flow.Flow
+import java.util.Calendar
 import javax.inject.Inject
 
 class UserListLocalRepositoryImp @Inject constructor(
     private val itemUserListDao: AppDatabase
 ) {
-    fun getItemUserListByQuery(searchQuery: String): List<ItemUserEntity>? {
+    fun getItemUserListByQuery(searchQuery: String): UserListEntity? {
         return try {
-            val result = itemUserListDao.itemUserListDao().getItemUserListByQuery(searchQuery)
-            result.userList
+            return itemUserListDao.itemUserListDao().getItemUserListByQuery(searchQuery)
         } catch (e: Exception) {
             null
         }
@@ -21,7 +21,8 @@ class UserListLocalRepositoryImp @Inject constructor(
     fun insertList(searchQuery: String, itemUserList: List<ItemUserEntity>) {
         itemUserListDao.itemUserListDao().insertList(UserListEntity(
             query = searchQuery,
-            userList = itemUserList
+            userList = itemUserList,
+            createdAt = Calendar.getInstance().time.time
         ))
     }
 

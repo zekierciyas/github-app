@@ -11,11 +11,10 @@ import com.google.gson.annotations.SerializedName
 @Entity(tableName = "user_list")
 data class UserListEntity(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    val id: Long = 0,
-    val userList: List<ItemUserEntity>,
+    @ColumnInfo(name = "id") val id: Long = 0,
+    @ColumnInfo(name = "user_list") val userList: List<ItemUserEntity>,
     @ColumnInfo(name = "query") val query: String,
-)
+    @ColumnInfo(name = "created_at") val createdAt: Long = 0)
 data class ItemUserEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")

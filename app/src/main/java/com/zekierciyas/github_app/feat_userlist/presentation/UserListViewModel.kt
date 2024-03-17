@@ -8,10 +8,14 @@ import com.zekierciyas.github_app.feat_userlist.domain.model.UserListDomainModel
 import com.zekierciyas.github_app.feat_userlist.domain.usecase.GetUserListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.stateIn
@@ -27,10 +31,16 @@ class UserListViewModel @Inject constructor(
     private val _userFlow = MutableStateFlow<DataState<List<UserListDomainModel>>>(DataState.Loading)
     val userFlow: StateFlow<DataState<List<UserListDomainModel>>> = _userFlow.asStateFlow()
 
+    private var searchJob: Job? = null
+
+    @OptIn(FlowPreview::class)
     fun search(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch(Dispatchers.IO) {
             userListUseCase
                 .execute(query)
+                .distinctUntilChanged()
+                .debounce(500)
                 .collect{
                     _userFlow.emit(it)
                 }
