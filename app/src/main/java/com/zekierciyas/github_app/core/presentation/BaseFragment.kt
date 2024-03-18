@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.zekierciyas.github_app.core.presentation.widget.CustomErrorDialog
 import com.zekierciyas.github_app.core.util.hideKeyboard
@@ -48,11 +49,10 @@ abstract class BaseFragment<VM : BaseViewModel>  : Fragment() {
             viewModel.navigateTo.collectLatest {
                 when(it) {
                     is NavigationCommands.NavigateDirections -> {
-                        findNavController().navigate(it.direction)
+                        navigate(it.direction)
                     }
 
                     is NavigationCommands.NavigateToHomeScreen -> {
-                        //TODO
                         findNavController().popBackStack()
                     }
                 }
@@ -62,5 +62,10 @@ abstract class BaseFragment<VM : BaseViewModel>  : Fragment() {
 
     private fun initErrorDialog() {
         customErrorMessage = CustomErrorDialog.create(requireContext())
+    }
+
+    private fun navigate(destination: NavDirections) = with(findNavController()) {
+        currentDestination?.getAction(destination.actionId)
+            ?.let { navigate(destination) }
     }
 }

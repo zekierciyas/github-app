@@ -61,10 +61,13 @@ class CustomSearchBar @JvmOverloads constructor(
         cardView.radius = cornerRadius
 
         searchEditText = TextInputEditText(context)
-        searchEditText.layoutParams = LayoutParams(
+        val editTextParams = LayoutParams(
             LayoutParams.MATCH_PARENT,
             LayoutParams.WRAP_CONTENT
         )
+        editTextParams.marginStart = 20
+        searchEditText.layoutParams = editTextParams
+        searchEditText.layoutParams
         searchEditText.background = null
         searchEditText.inputType = android.text.InputType.TYPE_CLASS_TEXT
         searchEditText.maxLines = 1

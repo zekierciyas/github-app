@@ -1,14 +1,16 @@
 package com.zekierciyas.github_app.feat_userlist.presentation
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.zekierciyas.github_app.databinding.ContentUserListBinding
 import com.zekierciyas.github_app.feat_userlist.domain.model.UserListDomainModel
 
-class UserListAdapter : ListAdapter<UserListDomainModel, UserListAdapter.UserViewHolder>(UserListDiffCallback()) {
+class UserListAdapter(private val listener: (String) -> Unit) : ListAdapter<UserListDomainModel, UserListAdapter.UserViewHolder>(UserListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -21,7 +23,16 @@ class UserListAdapter : ListAdapter<UserListDomainModel, UserListAdapter.UserVie
         holder.bind(user)
     }
 
-    inner class UserViewHolder(private val binding: ContentUserListBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class UserViewHolder(private val binding: ContentUserListBinding)
+        : RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(view: View) {
+            listener.invoke(binding.name.text.toString())
+        }
         fun bind(user: UserListDomainModel) {
             //Binding the given domain model to content
             binding.userId.text = user.id.toString()

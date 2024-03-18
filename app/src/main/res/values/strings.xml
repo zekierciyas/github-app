@@ -3,4 +3,11 @@
     <string name="error_user_list">During the process of user list fetch something gone wrong!</string>
     <string name="error_user_detail">Something gone wrong, please try again!</string>
     <string name="github_profiles">GitHub Profiles</string>
+    <string name="name">Name:</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="repositories">Repositories</string>
+    <string name="user_name">User Name</string>
+    <string name="bio">BIO</string>
+    <string name="info">INFO</string>
 </resources>

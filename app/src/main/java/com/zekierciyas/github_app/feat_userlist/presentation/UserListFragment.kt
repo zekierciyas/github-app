@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.zekierciyas.github_app.R
 import com.zekierciyas.github_app.core.data.model.DataState
 import com.zekierciyas.github_app.core.presentation.BaseFragment
 import com.zekierciyas.github_app.databinding.FragmentUserListBinding
@@ -43,7 +44,10 @@ class UserListFragment: BaseFragment<UserListViewModel>() {
     }
 
     private fun initRecyclerView() {
-        userListAdapter = UserListAdapter()
+        userListAdapter = UserListAdapter{
+            val action = UserListFragmentDirections.actionUserListFragmentToUserDetailFragment(it)
+            viewModel.navigateTo(action)
+        }
         binding.rcProfileList.apply {
             adapter = userListAdapter
             layoutManager = LinearLayoutManager(requireContext())
