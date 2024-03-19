@@ -1,8 +1,8 @@
 package com.zekierciyas.github_app.feat_userlist.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.zekierciyas.github_app.core.coroutine.WhileSubscribedOrRetained
 import com.zekierciyas.github_app.core.data.model.DataState
+import com.zekierciyas.github_app.core.domain.usecase.UserFavoriteUseCase
 import com.zekierciyas.github_app.core.presentation.BaseViewModel
 import com.zekierciyas.github_app.feat_userlist.domain.model.UserListDomainModel
 import com.zekierciyas.github_app.feat_userlist.domain.usecase.GetUserListUseCase
@@ -16,16 +16,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(
-    private val userListUseCase: GetUserListUseCase
+    private val userListUseCase: GetUserListUseCase,
+    private val favUserUseCase: UserFavoriteUseCase
 ) : BaseViewModel() {
 
     private val _userFlow = MutableStateFlow<DataState<List<UserListDomainModel>>>(DataState.Loading)
@@ -44,6 +41,14 @@ class UserListViewModel @Inject constructor(
                 .collect{
                     _userFlow.emit(it)
                 }
+        }
+    }
+
+    fun addUserFavOrRemove(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            favUserUseCase.execute(id).collect{
+
+            }
         }
     }
 

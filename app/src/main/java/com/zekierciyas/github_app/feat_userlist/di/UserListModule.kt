@@ -3,8 +3,9 @@ package com.zekierciyas.github_app.feat_userlist.di
 import android.content.Context
 import androidx.room.Room
 import com.zekierciyas.github_app.core.data.api.GithubAPI
+import com.zekierciyas.github_app.core.data.repository.FavUserRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
-import com.zekierciyas.github_app.feat_userlist.data.local.db.AppDatabase
+import com.zekierciyas.github_app.feat_userlist.data.local.db.UserListCacheDB
 import com.zekierciyas.github_app.feat_userlist.data.local.repository.UserListLocalRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.data.remote.repository.UserListRemoteRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.domain.mapper.UserListMapper
@@ -32,6 +33,7 @@ object UserListModule {
     fun provideSampleUseCase(
         repository: UserListRemoteRepositoryImp,
         userListLocalRepositoryImp: UserListLocalRepositoryImp,
+        userFavRepo: FavUserRepositoryImp,
         userListMapper: UserListMapper,
         cacheExpiryDatePolicy: CacheExpiryDatePolicy
     ): GetUserListUseCase {
@@ -39,7 +41,8 @@ object UserListModule {
             userListRemoteRepo = repository,
             userListLocalRepo = userListLocalRepositoryImp,
             userListMapper = userListMapper,
-            cacheExpiryDatePolicy = cacheExpiryDatePolicy
+            cacheExpiryDatePolicy = cacheExpiryDatePolicy,
+            userFavRepo = userFavRepo
         )
     }
 
@@ -51,17 +54,17 @@ object UserListModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext context: Context): UserListCacheDB {
         return Room.databaseBuilder(
             context,
-            AppDatabase::class.java,
+            UserListCacheDB::class.java,
             "github-db"
         ).build()
     }
 
     @Provides
     @Singleton
-    fun provideItemUserListRepository(db: AppDatabase): UserListLocalRepositoryImp {
+    fun provideItemUserListRepository(db: UserListCacheDB): UserListLocalRepositoryImp {
         return UserListLocalRepositoryImp(db)
     }
 

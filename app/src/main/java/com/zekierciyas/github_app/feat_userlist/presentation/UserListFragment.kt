@@ -44,10 +44,15 @@ class UserListFragment: BaseFragment<UserListViewModel>() {
     }
 
     private fun initRecyclerView() {
-        userListAdapter = UserListAdapter{
-            val action = UserListFragmentDirections.actionUserListFragmentToUserDetailFragment(it)
-            viewModel.navigateTo(action)
-        }
+        userListAdapter = UserListAdapter(
+            itemClicked = {
+                val action = UserListFragmentDirections.actionUserListFragmentToUserDetailFragment(it)
+                viewModel.navigateTo(action)
+            },
+            favoriteButtonClicked = {
+                viewModel.addUserFavOrRemove(it)
+            }
+        )
         binding.rcProfileList.apply {
             adapter = userListAdapter
             layoutManager = LinearLayoutManager(requireContext())

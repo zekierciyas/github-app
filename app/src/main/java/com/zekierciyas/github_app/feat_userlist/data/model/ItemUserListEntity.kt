@@ -90,7 +90,11 @@ data class ItemUserEntity(
 
     @SerializedName("url")
     @ColumnInfo(name = "url")
-    val url: String?
+    val url: String?,
+
+    @SerializedName("is_favorite")
+    @ColumnInfo(name = "is_favorite")
+    var isFavorite: Boolean = false
 )
 
 class UserListTypeConverter {

@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.zekierciyas.github_app.core.data.model.DataState
 import com.zekierciyas.github_app.core.presentation.BaseFragment
+import com.zekierciyas.github_app.core.util.ifNullDefault
 import com.zekierciyas.github_app.databinding.FragmentUserDetailBinding
-import com.zekierciyas.github_app.databinding.FragmentUserListBinding
 import com.zekierciyas.github_app.feat_userdetail.domain.model.UserDetailDomainModel
-import com.zekierciyas.github_app.feat_userlist.presentation.UserListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -57,13 +55,28 @@ class UserDetailFragment: BaseFragment<UserDetailViewModel>() {
                 binding.profileImage.loadImage(state.data.avatarUrl)
                 binding.name.text = state.data.name
                 binding.userName.text = state.data.login
-                binding.bioDescription.text = state.data.bio.toString()
-                binding.blog.text = state.data.blog.toString()
-                binding.emailAddress.text = state.data.email.toString()
-                binding.location.text = state.data.location
-                binding.followersCount.text = state.data.followers.toString()
-                binding.followingCount.text = state.data.following.toString()
-                binding.repositories.text = state.data.publicRepos.toString()
+                state.data.bio.ifNullDefault("...") {
+                    binding.bioDescription.text = it.toString()
+                }
+                binding.bioDescription.text
+                state.data.blog.ifNullDefault("..."){
+                    binding.blog.text = it
+                }
+                state.data.email.ifNullDefault("..."){
+                    binding.emailAddress.text = it.toString()
+                }
+                state.data.location.ifNullDefault("..."){
+                    binding.location.text = it
+                }
+                state.data.followers.ifNullDefault("...."){
+                    binding.followersCount.text = it.toString()
+                }
+                state.data.following.ifNullDefault("..."){
+                    binding.followingCount.text = it.toString()
+                }
+                state.data.publicRepos.ifNullDefault("..."){
+                    binding.repositories.text = it.toString()
+                }
             }
 
             is DataState.Error -> {

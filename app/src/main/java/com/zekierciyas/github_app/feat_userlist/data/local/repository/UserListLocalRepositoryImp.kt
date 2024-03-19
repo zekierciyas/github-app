@@ -1,14 +1,13 @@
 package com.zekierciyas.github_app.feat_userlist.data.local.repository
 
-import com.zekierciyas.github_app.feat_userlist.data.local.db.AppDatabase
+import com.zekierciyas.github_app.feat_userlist.data.local.db.UserListCacheDB
 import com.zekierciyas.github_app.feat_userlist.data.model.ItemUserEntity
 import com.zekierciyas.github_app.feat_userlist.data.model.UserListEntity
-import kotlinx.coroutines.flow.Flow
 import java.util.Calendar
 import javax.inject.Inject
 
 class UserListLocalRepositoryImp @Inject constructor(
-    private val itemUserListDao: AppDatabase
+    private val itemUserListDao: UserListCacheDB
 ) {
     fun getItemUserListByQuery(searchQuery: String): UserListEntity? {
         return try {

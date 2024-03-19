@@ -11,7 +11,8 @@ class UserListMapper @Inject constructor(): GenericMapper<ItemUserEntity, UserLi
             avatarUrl = entity.avatarUrl,
             login = entity.login,
             id = entity.id.toInt(),
-            type = entity.type
+            type = entity.type,
+            isFavorite = entity.isFavorite
         )
     }
 }

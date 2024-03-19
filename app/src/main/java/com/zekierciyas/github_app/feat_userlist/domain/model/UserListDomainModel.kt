@@ -11,5 +11,7 @@ data class UserListDomainModel(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("type")
-    val type: String?
+    val type: String?,
+    @SerializedName("isFavorite")
+    val isFavorite: Boolean = false
 )
