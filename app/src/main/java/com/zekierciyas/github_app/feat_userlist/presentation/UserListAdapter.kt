@@ -26,6 +26,7 @@ class UserListAdapter(
         holder.bind(user)
     }
 
+
     inner class UserViewHolder(private val binding: ContentUserListBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
@@ -46,6 +47,7 @@ class UserListAdapter(
             binding.type.text = user.type
             binding.favoriteButton.isSelected = user.isFavorite
             binding.favoriteButton.isChecked = user.isFavorite
+            binding.favoriteButton.tag = adapterPosition
         }
     }
 }

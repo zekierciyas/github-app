@@ -25,7 +25,7 @@ class UserListViewModel @Inject constructor(
     private val favUserUseCase: UserFavoriteUseCase
 ) : BaseViewModel() {
 
-    private val _userFlow = MutableStateFlow<DataState<List<UserListDomainModel>>>(DataState.Loading)
+    private val _userFlow = MutableStateFlow<DataState<List<UserListDomainModel>>>(DataState.Empty)
     val userFlow: StateFlow<DataState<List<UserListDomainModel>>> = _userFlow.asStateFlow()
 
     private var searchJob: Job? = null

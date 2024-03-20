@@ -10,15 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.zekierciyas.github_app.R
 import com.zekierciyas.github_app.core.data.model.DataState
 import com.zekierciyas.github_app.core.presentation.BaseFragment
+import com.zekierciyas.github_app.core.util.hide
+import com.zekierciyas.github_app.core.util.hideKeyboard
+import com.zekierciyas.github_app.core.util.show
 import com.zekierciyas.github_app.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -67,10 +66,20 @@ class UserListFragment: BaseFragment<UserListViewModel>() {
                     when(it) {
                         is DataState.Success -> {
                             userListAdapter.submitList(it.data)
+                            binding.rcProfileList.show()
+                            binding.loader.hide()
                         }
 
                         is DataState.Error -> {
-                            showErrorMessage(it.exception.toString(), 4000)
+                            showErrorMessage(it.exception.toString(), 3000)
+                            binding.loader.hide()
+                            hideKeyboard()
+                        }
+
+                        is DataState.Loading -> {
+                            binding.loader.show()
+                            binding.rcProfileList.hide()
+                            hideKeyboard()
                         }
 
                         else -> {
