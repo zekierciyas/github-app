@@ -1,4 +1,6 @@
 # github-app
+<img src="/docs/banner.jpg" align="center"/>
+
  An android app that lists users on Github and shows the user information's in detail page
 
 # Conventional Commit Guidelines
