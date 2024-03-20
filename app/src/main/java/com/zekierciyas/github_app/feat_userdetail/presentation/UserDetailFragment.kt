@@ -37,6 +37,7 @@ class UserDetailFragment: BaseFragment<UserDetailViewModel>() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModel()
         observeViewAction()
+        viewModel.getUserDetail()
     }
 
     private fun observeViewModel() {
@@ -55,6 +56,9 @@ class UserDetailFragment: BaseFragment<UserDetailViewModel>() {
                 binding.profileImage.loadImage(state.data.avatarUrl)
                 binding.name.text = state.data.name
                 binding.userName.text = state.data.login
+                binding.favoriteButton.isSelected = state.data.isFavorite?: false
+                binding.favoriteButton.isChecked = state.data.isFavorite?: false
+
                 state.data.bio.ifNullDefault("...") {
                     binding.bioDescription.text = it.toString()
                 }
@@ -92,6 +96,10 @@ class UserDetailFragment: BaseFragment<UserDetailViewModel>() {
     private fun observeViewAction() {
         binding.backPress.setOnClickListener {
             viewModel.navigateToHomeScreen()
+        }
+
+        binding.favoriteButton.setOnClickListener {
+            viewModel.addUserFavOrRemove()
         }
     }
 }

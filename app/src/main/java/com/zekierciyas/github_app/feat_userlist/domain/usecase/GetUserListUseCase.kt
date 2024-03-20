@@ -44,6 +44,7 @@ class GetUserListUseCase @Inject constructor(
                     if (isExpired) {
                         //Data is expired, fetch updated data from remote api
                         val list = userListRemoteRepo.getUserList(params)
+                        //Check the users which one is favorite
                         val userList = searchFavorites(list.items!!)
                         val mappedList = userList.map {
                             userListMapper.map(it)

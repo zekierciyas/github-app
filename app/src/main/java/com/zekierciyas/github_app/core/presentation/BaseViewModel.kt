@@ -7,10 +7,6 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-/**
- * @Author: @zekiamani
- * @Date: 21.12.2023
- */
 abstract class BaseViewModel: ViewModel() {
 
     private var _navigateTo = MutableSharedFlow<NavigationCommands>(replay = 0, extraBufferCapacity = 1, BufferOverflow.DROP_OLDEST)

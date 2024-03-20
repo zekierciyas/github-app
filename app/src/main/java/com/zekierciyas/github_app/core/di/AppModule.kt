@@ -2,6 +2,7 @@ package com.zekierciyas.github_app.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.gson.Gson
 import com.zekierciyas.github_app.core.data.repository.FavUserRepositoryImp
 import com.zekierciyas.github_app.core.data.db.AppDatabase
 import com.zekierciyas.github_app.core.data.db.UserInfoDao
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppDataBaseModule {
+object AppModule {
 
     @Provides
     @Singleton
@@ -35,5 +36,11 @@ object AppDataBaseModule {
             AppDatabase::class.java,
             "app-db"
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson {
+        return Gson()
     }
 }

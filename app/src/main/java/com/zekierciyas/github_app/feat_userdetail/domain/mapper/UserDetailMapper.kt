@@ -18,7 +18,8 @@ class UserDetailMapper @Inject constructor(): GenericMapper<UserDetailEntity, Us
             followers = entity.followers,
             following = entity.following,
             publicRepos = entity.publicRepos,
-            location = entity.location
+            location = entity.location,
+            isFavorite = entity.isFavorite
         )
     }
 }

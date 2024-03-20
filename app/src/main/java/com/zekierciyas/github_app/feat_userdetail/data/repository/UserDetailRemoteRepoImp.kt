@@ -5,7 +5,7 @@ import com.zekierciyas.github_app.feat_userdetail.data.model.UserDetailEntity
 import com.zekierciyas.github_app.feat_userdetail.domain.repository.GetUserDetailRepository
 import javax.inject.Inject
 
-class UserDetailRepositoryImp @Inject constructor(
+class UserDetailRemoteRepoImp @Inject constructor(
     private val githubAPI: GithubAPI
 ): GetUserDetailRepository {
     override suspend fun getUserDetailByLogin(login: String): UserDetailEntity {

@@ -3,6 +3,7 @@ package com.zekierciyas.github_app.feat_userdetail.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.zekierciyas.github_app.core.data.model.DataState
+import com.zekierciyas.github_app.core.domain.usecase.UserFavoriteUseCase
 import com.zekierciyas.github_app.core.presentation.BaseViewModel
 import com.zekierciyas.github_app.feat_userdetail.domain.model.UserDetailDomainModel
 import com.zekierciyas.github_app.feat_userdetail.domain.usecase.GetUserDetailUseCase
@@ -15,20 +16,23 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val userDetailUseCase: GetUserDetailUseCase
+    private val userDetailUseCase: GetUserDetailUseCase,
+    private val favUserUseCase: UserFavoriteUseCase
 ): BaseViewModel() {
 
     private val _userDetailFlow = MutableStateFlow<DataState<UserDetailDomainModel>>(DataState.Loading)
     val userDetailFlow: StateFlow<DataState<UserDetailDomainModel>> = _userDetailFlow.asStateFlow()
 
     private var searchJob: Job? = null
-    init {
-        val login: String? = savedStateHandle["login"]
+    private val login: String? = savedStateHandle["login"]
+
+    fun getUserDetail() {
         searchJob = viewModelScope.launch(Dispatchers.IO) {
             userDetailUseCase
                 .execute(login!!)
@@ -36,6 +40,14 @@ class UserDetailViewModel @Inject constructor(
                 .collect{
                     _userDetailFlow.emit(it)
                 }
+        }
+    }
+
+    fun addUserFavOrRemove() {
+        viewModelScope.launch(Dispatchers.IO) {
+            favUserUseCase.execute(login!!).collect{
+               if (it is DataState.Error) _userDetailFlow.emit(it)
+            }
         }
     }
 }

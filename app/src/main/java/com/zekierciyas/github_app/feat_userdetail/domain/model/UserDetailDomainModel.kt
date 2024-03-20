@@ -24,5 +24,7 @@ data class UserDetailDomainModel (
     @SerializedName("public_repos")
     val publicRepos: Int?,
     @SerializedName("location")
-    val location: String?
+    val location: String?,
+    @SerializedName("isFavorite")
+    val isFavorite: Boolean? = false
 )
