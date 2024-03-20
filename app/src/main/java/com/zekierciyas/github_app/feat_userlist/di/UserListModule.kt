@@ -4,7 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.zekierciyas.github_app.core.data.api.GithubAPI
 import com.zekierciyas.github_app.core.data.repository.FavUserRepositoryImp
-import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
+import com.zekierciyas.github_app.core.util.TimeStampManager
+import com.zekierciyas.github_app.core.data.db.CacheExpiryDatePolicy
 import com.zekierciyas.github_app.feat_userlist.data.local.db.UserListCacheDB
 import com.zekierciyas.github_app.feat_userlist.data.local.repository.UserListLocalRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.data.remote.repository.UserListRemoteRepositoryImp
@@ -15,7 +16,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import java.util.Calendar
 import javax.inject.Singleton
 
 @Module
@@ -64,13 +64,7 @@ object UserListModule {
 
     @Provides
     @Singleton
-    fun provideItemUserListRepository(db: UserListCacheDB): UserListLocalRepositoryImp {
-        return UserListLocalRepositoryImp(db)
-    }
-
-    @Provides
-    @Singleton
-    fun cacheExpiryPolicy(): CacheExpiryDatePolicy {
-        return CacheExpiryDatePolicy(calendar = Calendar.getInstance())
+    fun provideItemUserListRepository(db: UserListCacheDB, timePicker: TimeStampManager): UserListLocalRepositoryImp {
+        return UserListLocalRepositoryImp(db, timePicker)
     }
 }

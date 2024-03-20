@@ -7,3 +7,4 @@ fun <T> T?.ifNullDefault(default: T, result : (T) -> Unit) {
         result.invoke(default)
     }
 }
+

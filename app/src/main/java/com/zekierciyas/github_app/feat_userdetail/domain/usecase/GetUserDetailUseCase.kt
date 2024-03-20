@@ -8,7 +8,7 @@ import com.zekierciyas.github_app.feat_userdetail.data.model.UserDetailEntity
 import com.zekierciyas.github_app.feat_userdetail.data.repository.UserDetailRemoteRepoImp
 import com.zekierciyas.github_app.feat_userdetail.domain.mapper.UserDetailMapper
 import com.zekierciyas.github_app.feat_userdetail.domain.model.UserDetailDomainModel
-import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
+import com.zekierciyas.github_app.core.data.db.CacheExpiryDatePolicy
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -37,6 +37,7 @@ class GetUserDetailUseCase @Inject constructor(
                   if (isDataExpired) {
                       //Data is expired, fetch updated data from remote api
                       val remoteResult = remoteRepo.getUserDetailByLogin(params)
+                      localRepo.insertUser(remoteResult)
                       //Check the user is already favorite
                       val updatedRemoteResult = isUserFavorite(remoteResult)
                       val mappedRemoteResult = mapper.map(updatedRemoteResult)

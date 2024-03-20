@@ -3,16 +3,15 @@ package com.zekierciyas.github_app.feat_userdetail.di
 import android.content.Context
 import androidx.room.Room
 import com.zekierciyas.github_app.core.data.api.GithubAPI
-import com.zekierciyas.github_app.core.data.db.AppDatabase
-import com.zekierciyas.github_app.core.data.db.UserInfoDao
 import com.zekierciyas.github_app.core.data.repository.FavUserRepositoryImp
+import com.zekierciyas.github_app.core.util.TimeStampManager
 import com.zekierciyas.github_app.feat_userdetail.data.local.db.UserDetailCacheDB
 import com.zekierciyas.github_app.feat_userdetail.data.local.db.UserDetailDao
 import com.zekierciyas.github_app.feat_userdetail.data.local.repository.UserDetailLocalRepoImp
 import com.zekierciyas.github_app.feat_userdetail.data.repository.UserDetailRemoteRepoImp
 import com.zekierciyas.github_app.feat_userdetail.domain.mapper.UserDetailMapper
 import com.zekierciyas.github_app.feat_userdetail.domain.usecase.GetUserDetailUseCase
-import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
+import com.zekierciyas.github_app.core.data.db.CacheExpiryDatePolicy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,8 +50,8 @@ object UserDetailModule {
 
     @Provides
     @Singleton
-    fun provideLocalUserDetailRepository(userDetailDao: UserDetailDao): UserDetailLocalRepoImp {
-        return UserDetailLocalRepoImp(userDetailDao = userDetailDao)
+    fun provideLocalUserDetailRepository(userDetailDao: UserDetailDao, currentTimePicker: TimeStampManager): UserDetailLocalRepoImp {
+        return UserDetailLocalRepoImp(userDetailDao = userDetailDao, timePicker =  currentTimePicker)
     }
 
     @Provides

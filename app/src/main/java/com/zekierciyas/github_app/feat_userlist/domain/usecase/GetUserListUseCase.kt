@@ -3,18 +3,15 @@ package com.zekierciyas.github_app.feat_userlist.domain.usecase
 import com.zekierciyas.github_app.core.data.model.DataState
 import com.zekierciyas.github_app.core.data.repository.FavUserRepositoryImp
 import com.zekierciyas.github_app.core.domain.usecase.BaseUseCase
-import com.zekierciyas.github_app.feat_userlist.data.local.CacheExpiryDatePolicy
+import com.zekierciyas.github_app.core.data.db.CacheExpiryDatePolicy
 import com.zekierciyas.github_app.feat_userlist.data.local.repository.UserListLocalRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.data.model.ItemUserEntity
-import com.zekierciyas.github_app.feat_userlist.data.model.UserResponseEntity
 import com.zekierciyas.github_app.feat_userlist.data.remote.repository.UserListRemoteRepositoryImp
 import com.zekierciyas.github_app.feat_userlist.domain.mapper.UserListMapper
 import com.zekierciyas.github_app.feat_userlist.domain.model.UserListDomainModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetUserListUseCase @Inject constructor(
@@ -36,8 +33,8 @@ class GetUserListUseCase @Inject constructor(
                 val mappedList = userList.map {
                     userListMapper.map(it)
                 }
-                userListLocalRepo.insertList(searchQuery = params, list.items!! )
-                send(DataState.Success(mappedList!!))
+                userListLocalRepo.insertList(searchQuery = params, list.items)
+                send(DataState.Success(mappedList))
 
             } else {
                 cacheExpiryDatePolicy.checkExpiry(localResult.createdAt).collectLatest{ isExpired ->
@@ -49,8 +46,8 @@ class GetUserListUseCase @Inject constructor(
                         val mappedList = userList.map {
                             userListMapper.map(it)
                         }
-                        userListLocalRepo.insertList(searchQuery = params, list.items!! )
-                        send(DataState.Success(mappedList!!))
+                        userListLocalRepo.insertList(searchQuery = params, list.items)
+                        send(DataState.Success(mappedList))
 
                     } else {
                         //Data is not expired, read from local database

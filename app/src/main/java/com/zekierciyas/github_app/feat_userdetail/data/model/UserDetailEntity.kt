@@ -30,7 +30,7 @@ data class UserDetailEntity(
 
     @ColumnInfo(name = "created_at_on_db")
     @SerializedName("created_at_on_db")
-    val createdAt: Long = 0,
+    var createdAt: String? = "",
 
     @ColumnInfo(name = "email")
     @SerializedName("email")
