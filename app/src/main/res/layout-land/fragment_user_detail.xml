@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_background_color">
+
+        <LinearLayout
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/gray"
+            android:orientation="horizontal" />
+
+        <CheckBox
+            android:id="@+id/favorite_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/user_fav_selector"
+            android:button="@null"
+            android:contentDescription="user image favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.AsyncImageView
+            android:id="@+id/profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:padding="5dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="3dp"
+            tools:src="@drawable/ic_github_place_holder" />
+
+        <ImageButton
+            android:id="@+id/back_press"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:padding="10dp"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_back_press"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/customTextView2"
+            style="@style/TextStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="12dp"
+            android:text="@string/repositories"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/repositories"
+            style="@style/TextStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/customTextView2"
+            app:layout_constraintEnd_toEndOf="@+id/customTextView2"
+            app:layout_constraintStart_toStartOf="@+id/customTextView2"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
+            tools:text="44" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/followers"
+            style="@style/TextStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/followers"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/following"
+            style="@style/TextStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="@string/following"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/card_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/followers" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/following_count"
+            style="@style/TextStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/following"
+            app:layout_constraintEnd_toEndOf="@+id/following"
+            app:layout_constraintStart_toStartOf="@+id/following"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
+            tools:text="39" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/followers_count"
+            style="@style/TextStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/followers"
+            app:layout_constraintEnd_toEndOf="@+id/followers"
+            app:layout_constraintStart_toStartOf="@+id/followers"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
+            tools:text="390" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/name"
+            style="@style/TextStyle.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image"
+            tools:text="Name Surname" />
+
+        <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+            android:id="@+id/user_name"
+            style="@style/TextStyle.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name"
+            tools:text="username" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:id="@+id/bio_layout"
+            app:layout_constraintTop_toBottomOf="@+id/card_view">
+
+            <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                android:id="@+id/bio"
+                style="@style/TextStyle.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/app_font_color"
+                android:text="@string/bio"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view"
+                tools:text="BIO" />
+
+            <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                android:id="@+id/bio_description"
+                style="@style/TextStyle.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/bio"
+                android:textColor="@color/app_font_color"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bio"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." />
+
+            <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                android:id="@+id/info"
+                style="@style/TextStyle.Large"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/app_font_color"
+                android:text="@string/info"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_view"
+                tools:text="INFO" />
+
+            <LinearLayout
+                android:id="@+id/email_column"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_email" />
+
+                <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                    android:id="@+id/email_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/TextStyle.Medium"
+                    android:layout_marginStart="20dp"
+                    tools:text="aksdm@gmail.com"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/location_column"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_location" />
+
+                <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/TextStyle.Medium"
+                    android:layout_marginStart="20dp"
+                    tools:text="Turkey"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/web_site_column"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_blog_website" />
+
+                <com.zekierciyas.github_app.core.presentation.widget.CustomTextView
+                    android:id="@+id/blog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/TextStyle.Medium"
+                    android:layout_marginStart="20dp"
+                    android:autoLink="web"
+                    android:linksClickable="true"
+                    tools:text="www.github.com"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

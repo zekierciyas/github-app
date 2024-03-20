@@ -38,6 +38,7 @@
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
+        android:padding="3dp"
         app:layout_constraintBottom_toBottomOf="@+id/card_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.13"
@@ -46,7 +47,7 @@
         app:layout_constraintVertical_bias="0.26"
         app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
         app:strokeColor="@color/white"
-        app:strokeWidth="4dp"
+        app:strokeWidth="2dp"
         tools:src="@drawable/ic_github_place_holder" />
 
     <ImageButton
