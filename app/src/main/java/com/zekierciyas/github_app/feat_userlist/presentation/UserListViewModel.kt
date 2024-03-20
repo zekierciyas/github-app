@@ -29,9 +29,11 @@ class UserListViewModel @Inject constructor(
     val userFlow: StateFlow<DataState<List<UserListDomainModel>>> = _userFlow.asStateFlow()
 
     private var searchJob: Job? = null
+    private var previousQuery: String? = null
 
     @OptIn(FlowPreview::class)
     fun search(query: String) {
+        previousQuery = query
         searchJob?.cancel()
         searchJob = viewModelScope.launch(Dispatchers.IO) {
             userListUseCase
@@ -41,6 +43,12 @@ class UserListViewModel @Inject constructor(
                 .collect{
                     _userFlow.emit(it)
                 }
+        }
+    }
+
+    fun refresh() {
+        previousQuery?.let {
+            search(query = it)
         }
     }
 
