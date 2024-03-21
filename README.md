@@ -33,6 +33,12 @@ The domain layer contains the business logic of the application. It defines how 
 - Material Design components for a modern and consistent UI
 - Kotlin DSL for Gradle build scripts
 
+## Screen Shots
+<img src="/docs/ss_1.png.jpg" align="center"/>
+<img src="/docs/ss_2.png.png.jpg" align="center"/>
+<img src="/docs/ss_3.png.png.jpg" align="center"/>
+<img src="/docs/ss_4.png.png.jpg" align="center"/>
+<img src="/docs/ss_5.png.png.jpg" align="center"/>
 
 ## Conventional Commit Guidelines
 
