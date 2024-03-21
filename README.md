@@ -34,7 +34,7 @@ The domain layer contains the business logic of the application. It defines how 
 - Kotlin DSL for Gradle build scripts
 
 
-# Conventional Commit Guidelines
+## Conventional Commit Guidelines
 
 In order to explain the commit history in the project more clearly, the commit guideline was designed according to European conventional commit rules. General commit types are as follows, check here for more detailed information. General commit types are as follows, check [here](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/) for more detailed information.
 
