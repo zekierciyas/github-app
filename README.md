@@ -35,9 +35,13 @@ The domain layer contains the business logic of the application. It defines how 
 
 ## Screen Shots
 
+* Portrait 
+
 |                  Listing Screen Empty              | Detail Sreen Loaded                                 | Detai Screen                                       |
 | -------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------- |
 | ![Listing Screen Empty ](/docs/ss_1.png)           | ![Detail Sreen Loaded ](/docs/ss_2.png)             | ![Detai Screen ](/docs/ss_3.png)                   |
+
+* Landscape 
 
 <img src="/docs/ss_4.png" align="center"/>
 <img src="/docs/ss_5.png" align="center"/>
