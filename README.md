@@ -3,6 +3,27 @@
 
  An android app that lists users on Github and shows the user information's in detail page
 
+ ## Features
+
+1. **Offline Listing with Room Database**
+   - Implements offline caching of data with Room Database.
+   - Adheres to cache expiry policy for efficient data management.
+
+2. **Remote Data from GitHub API**
+   - Fetches data from the GitHub API to populate the app with remote content.
+
+3. **Add/Remove User Favorites**
+   - Allows users to add/remove items to/from favorites list stored locally.
+
+4. **Data Listing with DiffUtil**
+   - Utilizes DiffUtil to efficiently update RecyclerView items.
+
+5. **Data Search**
+   - Enables users to search for items within the current list.
+
+6. **Portrait and Landscape Mode Support**
+   - Provides a seamless user experience in both portrait and landscape orientations. 
+
  ## Tech Stack
 
 ### Architecture
