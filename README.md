@@ -34,8 +34,10 @@ The domain layer contains the business logic of the application. It defines how 
 - Kotlin DSL for Gradle build scripts
 
 ## Screen Shots
-<img src="/docs/ss_1.png" align="center" height="500"/>
-<img src="/docs/ss_2.png" align="center" height="500"/>
+| First Picture                                      | Second Picture                                      |
+| -------------------------------------------------- | --------------------------------------------------- |
+| ![First Picture](/docs/ss_1.png)      | ![Second Picture](/docs/ss_2.png)      |
+
 <img src="/docs/ss_3.png" align="center" height="500"/>
 <img src="/docs/ss_4.png" align="center" height="500"/>
 <img src="/docs/ss_5.png" align="center" height="500"/>
