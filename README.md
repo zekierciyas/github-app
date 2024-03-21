@@ -34,13 +34,13 @@ The domain layer contains the business logic of the application. It defines how 
 - Kotlin DSL for Gradle build scripts
 
 ## Screen Shots
-| First Picture                                      | Second Picture                                      |
-| -------------------------------------------------- | --------------------------------------------------- |
-| ![First Picture](/docs/ss_1.png)      | ![Second Picture](/docs/ss_2.png)      |
 
-<img src="/docs/ss_3.png" align="center" height="500"/>
-<img src="/docs/ss_4.png" align="center" height="500"/>
-<img src="/docs/ss_5.png" align="center" height="500"/>
+|                  Listing Screen Empty              | Detail Sreen Loaded                                 | Detai Screen                                       |
+| -------------------------------------------------- | --------------------------------------------------- | -------------------------------------------------- |
+| ![Listing Screen Empty ](/docs/ss_1.png)           | ![Detail Sreen Loaded ](/docs/ss_2.png)             | ![Detai Screen ](/docs/ss_3.png)                   |
+
+<img src="/docs/ss_4.png" align="center"/>
+<img src="/docs/ss_5.png" align="center"/>
 
 ## Conventional Commit Guidelines
 
