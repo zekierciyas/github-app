@@ -15,7 +15,7 @@
 3. **Add/Remove User Favorites**
    - Allows users to add/remove items to/from favorites list stored locally.
 
-4. **Data Listing with DiffUtil**
+4. **Data Listing RecyclerView & DiffUtil**
    - Utilizes DiffUtil to efficiently update RecyclerView items.
 
 5. **Data Search**
@@ -69,7 +69,7 @@ The domain layer contains the business logic of the application. It defines how 
 
 ## Conventional Commit Guidelines
 
-In order to explain the commit history in the project more clearly, the commit guideline was designed according to European conventional commit rules. General commit types are as follows, check here for more detailed information. General commit types are as follows, check [here](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/) for more detailed information.
+In order to explain the commit history in the project more clearly, the commit guideline was designed according to European conventional commit rules. General commit types are as follows, check [here](https://ec.europa.eu/component-library/v1.15.0/eu/docs/conventions/git/) for more detailed information.
 
 * **feat**: A new feature
 * **fix**: A bug fix
